@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f3ea;
+  --foreground: #183224;
+  --sand-50: #f8f4ec;
+  --sand-100: #f3ebdc;
+  --sand-200: #e7dbc4;
+  --sand-300: #d8c4a1;
+  --leaf-300: #9dc28f;
+  --leaf-500: #5f9361;
+  --leaf-700: #2d5e3d;
+  --leaf-800: #224a31;
+  --leaf-900: #142c1f;
+  --ink-900: #163022;
+  --ink-700: #40614b;
+  --ink-600: #59725f;
+  --ink-500: #6f8174;
+  --terracotta-600: #b65b3d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(125, 184, 110, 0.15), transparent 30%),
+    linear-gradient(180deg, #f7f3ea 0%, #ffffff 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: rgba(95, 147, 97, 0.22);
+  color: var(--leaf-900);
+}
+
+.nav-link {
+  border-radius: 9999px;
+  padding: 0.7rem 1rem;
+  color: var(--leaf-800);
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.nav-link:hover {
+  background: rgba(95, 147, 97, 0.12);
+  color: var(--leaf-900);
+  transform: translateY(-1px);
+}
+
+.section-kicker {
+  display: inline-flex;
+  border-radius: 9999px;
+  border: 1px solid rgba(216, 196, 161, 0.95);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.6rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--leaf-700);
+}
+
+.section-title {
+  margin-top: 1.2rem;
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  color: var(--ink-900);
+}
+
+.section-copy {
+  margin-top: 1.1rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.95;
+  color: var(--ink-600);
 }
