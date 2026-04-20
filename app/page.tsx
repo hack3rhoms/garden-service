@@ -2,6 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "./components/contact-form";
 import { ServiceFilter } from "./components/service-filter";
+import { BeforeAfterSection } from "./components/Before-After-Section";
+import { CoverageMap } from "./components/coverage-map";
+import { readFileSync } from "fs";
+import { join } from "path";
+
+function getProjects() {
+  try {
+    return JSON.parse(readFileSync(join(process.cwd(), "data", "projects.json"), "utf-8"));
+  } catch {
+    return [];
+  }
+}
 
 const services = [
   {
@@ -51,8 +63,10 @@ const stats = [
 ];
 
 export default function Home() {
+  const projects = getProjects();
   return (
     <main className="overflow-hidden bg-[var(--sand-50)] text-[var(--ink-900)]">
+      {/* ─── HERO ─────────────────────────────────────────────────── */}
       <section className="relative isolate">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(113,168,111,0.24),_transparent_36%),radial-gradient(circle_at_right,_rgba(214,163,91,0.18),_transparent_30%),linear-gradient(180deg,_#f5f1e8_0%,_#f7fbf6_55%,_#ffffff_100%)]" />
 
@@ -67,20 +81,14 @@ export default function Home() {
           </Link>
 
           <nav className="hidden items-center gap-3 rounded-full border border-white/70 bg-white/70 px-3 py-2 shadow-[0_10px_30px_rgba(45,94,61,0.08)] backdrop-blur md:flex">
-            <a className="nav-link" href="#services">
-              Hizmetler
-            </a>
-            <a className="nav-link" href="#about">
-              Hakkimizda
-            </a>
-            <a className="nav-link" href="#contact">
-              Iletisim
-            </a>
+            <a className="nav-link" href="#services">Hizmetler</a>
+            <a className="nav-link" href="#about">Hakkimizda</a>
+            <a className="nav-link" href="#contact">Iletisim</a>
           </nav>
         </header>
 
         <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-20 pt-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-28 lg:pt-12">
-          <div className="space-y-8">
+          <div className="scroll-reveal space-y-8">
             <span className="inline-flex rounded-full border border-[var(--sand-300)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--leaf-700)]">
               Sakarya Bahce Bakim ve Peyzaj
             </span>
@@ -92,8 +100,7 @@ export default function Home() {
               <p className="max-w-2xl text-base leading-8 text-[var(--ink-600)] sm:text-lg">
                 Agac budamadan cim bicmeye, peyzaj duzeninden sezonluk temizlige
                 kadar tum hizmetleri tek bir sayfada topladik. Ziyaretciler hem
-                hizli bilgi aliyor hem de ayni ekrandan kesif talebi
-                olusturabiliyor.
+                hizli bilgi aliyor hem de ayni ekrandan kesif talebi olusturabiliyor.
               </p>
             </div>
 
@@ -124,7 +131,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="relative">
+          <div className="scroll-reveal relative" style={{ animationDelay: "0.15s" }}>
             <div className="absolute inset-x-6 -bottom-6 -z-10 h-20 rounded-full bg-[rgba(46,91,61,0.15)] blur-3xl" />
             <div className="grid gap-5 sm:grid-cols-[1.15fr_0.85fr]">
               <div className="relative min-h-[420px] overflow-hidden rounded-[36px] border border-white/70 bg-white/60 shadow-[0_26px_80px_rgba(30,62,41,0.12)]">
@@ -158,9 +165,7 @@ export default function Home() {
                       <p className="text-3xl font-semibold tracking-[-0.04em] text-[var(--leaf-800)]">
                         {stat.value}
                       </p>
-                      <p className="mt-1 text-sm text-[var(--ink-600)]">
-                        {stat.label}
-                      </p>
+                      <p className="mt-1 text-sm text-[var(--ink-600)]">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -170,29 +175,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── SERVICES ─────────────────────────────────────────────── */}
       <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="scroll-reveal mx-auto max-w-3xl text-center">
           <span className="section-kicker">Hizmetler</span>
           <h2 className="section-title">
             Guzel bir filtre ile hizmetleri tek bakista ayirin.
           </h2>
           <p className="section-copy">
             Kullanici ister agac bakimina ister peyzaj islerine bakiyor olsun,
-            tek tikla ilgilendigi hizmet grubuna gecerek kararini daha hizli
-            verir.
+            tek tikla ilgilendigi hizmet grubuna gecerek kararini daha hizli verir.
           </p>
         </div>
 
-        <div className="mt-12">
+        <div className="scroll-reveal mt-12" style={{ animationDelay: "0.1s" }}>
           <ServiceFilter services={services} />
         </div>
       </section>
 
+      {/* ─── ABOUT ────────────────────────────────────────────────── */}
       <section id="about" className="relative isolate py-20">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,_rgba(236,246,239,0.25)_0%,_rgba(236,246,239,0.92)_38%,_rgba(255,255,255,1)_100%)]" />
 
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
-          <div className="relative min-h-[340px] overflow-hidden rounded-[34px] border border-white/70 bg-white shadow-[0_22px_60px_rgba(28,65,41,0.12)]">
+          <div className="scroll-reveal relative min-h-[340px] overflow-hidden rounded-[34px] border border-white/70 bg-white shadow-[0_22px_60px_rgba(28,65,41,0.12)]">
             <Image
               src="/images/about-garden.svg"
               alt="Bahce ustasinin proje planlamasi yaptigi illustrasyon"
@@ -202,11 +208,10 @@ export default function Home() {
             />
           </div>
 
-          <div className="space-y-6">
+          <div className="scroll-reveal space-y-6" style={{ animationDelay: "0.12s" }}>
             <span className="section-kicker">Hakkimizda</span>
             <h2 className="section-title max-w-2xl text-left">
-              Bahceyi sadece temizlemiyor, kullanimi kolay bir yasam alani haline
-              getiriyoruz.
+              Bahceyi sadece temizlemiyor, kullanimi kolay bir yasam alani haline getiriyoruz.
             </h2>
             <p className="section-copy max-w-2xl text-left">
               Garden Service, kucuk bahcelerden villa peyzajina kadar farkli
@@ -217,31 +222,33 @@ export default function Home() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-[28px] border border-[var(--sand-300)] bg-white p-6 shadow-[0_14px_34px_rgba(39,74,52,0.07)]">
-                <h3 className="text-xl font-semibold text-[var(--ink-900)]">
-                  Planli Surec
-                </h3>
+                <h3 className="text-xl font-semibold text-[var(--ink-900)]">Planli Surec</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--ink-600)]">
-                  Her bahce icin uygulanacak is kalemlerini netlestirip gereksiz
-                  masraflari azaltiriz.
+                  Her bahce icin uygulanacak is kalemlerini netlestirip gereksiz masraflari azaltiriz.
                 </p>
               </div>
               <div className="rounded-[28px] border border-[var(--sand-300)] bg-white p-6 shadow-[0_14px_34px_rgba(39,74,52,0.07)]">
-                <h3 className="text-xl font-semibold text-[var(--ink-900)]">
-                  Dogal Gorunum
-                </h3>
+                <h3 className="text-xl font-semibold text-[var(--ink-900)]">Dogal Gorunum</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--ink-600)]">
-                  Hedefimiz fazla yapay gorunmeyen, yasayan ve bakimli bir bahce
-                  atmosferi olusturmak.
+                  Hedefimiz fazla yapay gorunmeyen, yasayan ve bakimli bir bahce atmosferi olusturmak.
                 </p>
               </div>
             </div>
+
+            {/* ✅ خريطة المناطق — مضافة هنا داخل قسم Hakkimizda */}
+            <CoverageMap />
           </div>
         </div>
       </section>
 
+      {/* ─── BEFORE / AFTER ───────────────────────────────────────── */}
+      {/* ✅ قسم جديد كامل بين Hakkimizda و Iletisim */}
+      <BeforeAfterSection projects={projects} preview={true} />
+
+      {/* ─── CONTACT ──────────────────────────────────────────────── */}
       <section id="contact" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
-          <div className="rounded-[34px] bg-[var(--leaf-900)] p-8 text-white shadow-[0_24px_80px_rgba(20,44,31,0.28)] sm:p-10">
+          <div className="scroll-reveal rounded-[34px] bg-[var(--leaf-900)] p-8 text-white shadow-[0_24px_80px_rgba(20,44,31,0.28)] sm:p-10">
             <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sand-100)]">
               Iletisim
             </span>
@@ -266,7 +273,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-white/70 bg-white p-8 shadow-[0_24px_80px_rgba(30,62,41,0.1)] sm:p-10">
+          <div className="scroll-reveal rounded-[34px] border border-white/70 bg-white p-8 shadow-[0_24px_80px_rgba(30,62,41,0.1)] sm:p-10" style={{ animationDelay: "0.1s" }}>
             <div className="mb-8">
               <span className="section-kicker">Kesif Formu</span>
               <h3 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[var(--ink-900)]">
@@ -276,7 +283,6 @@ export default function Home() {
                 Form basit tutuldu; ziyaretci zorlanmadan talep birakabiliyor.
               </p>
             </div>
-
             <ContactForm />
           </div>
         </div>

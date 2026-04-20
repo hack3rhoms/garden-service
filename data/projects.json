@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "Agac Budama",
+    "location": "Sakarya",
+    "badge": "Guvenli",
+    "category": "pruning",
+    "before": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "after": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
+    "createdAt": "2026-04-20"
+  },
+  {
+    "id": "2",
+    "title": "Cim Bicme",
+    "location": "Sapanca",
+    "badge": "Duzenli",
+    "category": "lawn",
+    "before": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80",
+    "after": "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=800&q=80",
+    "createdAt": "2026-04-20"
+  },
+  {
+    "id": "3",
+    "title": "Peyzaj Tasarimi",
+    "location": "Izmit",
+    "badge": "Estetik",
+    "category": "design",
+    "before": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+    "after": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&q=80",
+    "createdAt": "2026-04-20"
+  }
+]

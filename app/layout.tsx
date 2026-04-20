@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import { ScrollRevealInit } from "./components/ScrollRevealInit";
 
 export const metadata: Metadata = {
   title: "Garden Service | Sakarya Bahce Bakim ve Peyzaj Hizmetleri",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body>
         <Toaster position="top-center" />
         {children}
+        <ScrollRevealInit />
       </body>
     </html>
   );
