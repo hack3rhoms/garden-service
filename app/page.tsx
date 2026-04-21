@@ -8,13 +8,32 @@ import { StatsSection } from "./components/StatsSection";
 import { readFileSync } from "fs";
 import { join } from "path";
 
-function getProjects() {
+// في app/page.tsx — غيّر دالة getProjects هذه فقط:
+
+async function getProjects() {
   try {
-    return JSON.parse(readFileSync(join(process.cwd(), "data", "projects.json"), "utf-8"));
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/projects?order=created_at.desc`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
+        },
+        cache: "no-store",
+      }
+    );
+    const data = await res.json();
+    // حوّل before_url/after_url إلى before/after اللي يتوقعها الكومبوننت
+    return data.map((p: any) => ({
+      ...p,
+      before: p.before_url,
+      after: p.after_url,
+    }));
   } catch {
     return [];
   }
 }
+
 
 const services = [
   {
@@ -53,8 +72,8 @@ const highlights = [
   "Musteri bahcelerine ozel duzenli bakim yaklasimi",
 ];
 
-export default function Home() {
-  const projects = getProjects();
+export default async function Home() {
+  const projects = await getProjects();
 
   return (
     <main className="overflow-hidden bg-[var(--sand-50)] text-[var(--ink-900)]">

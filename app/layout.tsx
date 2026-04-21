@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="tr" data-scroll-behavior="smooth" className={`${serif.variable} ${sans.variable}`}>
       <body>
         <Toaster position="top-center" />
         {children}

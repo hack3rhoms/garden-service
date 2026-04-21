@@ -63,8 +63,8 @@ function SliderCard({ project }: { project: Project }) {
           <img
             src={project.before}
             alt="Once"
-            className="h-full object-cover"
-            style={{ width: containerRef.current?.offsetWidth ?? 400 }}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ width: "100%", minWidth: containerRef.current?.offsetWidth ?? 400 }}
             draggable={false}
           />
         </div>
